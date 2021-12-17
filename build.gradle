@@ -114,33 +114,24 @@ configurations.all {
 
 dependencies {
     compile "eu.usrv:YAMCore:${config.minecraft.version}-${config.yamcore.version}:deobf"
-    compile "com.azanor.baubles:Baubles:${config.baubles.version}:deobf"
-    compile ("appeng:appliedenergistics2:${config.ae2.version}:api") {
-        exclude module: "*"
-    }
-    compile "applecore:AppleCore:${config.applecore.version}:deobf"
-    compile "codechicken:CodeChickenLib:${config.minecraft.version}-${config.codechickenlib.version}:dev"
-    compile "codechicken:CodeChickenCore:${config.minecraft.version}-${config.codechickencore.version}:dev"
-    compile "codechicken:NotEnoughItems:${config.minecraft.version}-${config.nei.version}:dev"
     compile "net.industrial-craft:industrialcraft-2:${config.ic2.version}:dev"
-    compile ("com.enderio:EnderIO:${config.minecraft.version}-${config.enderio.version}:dev") {
-        exclude group: "mcp.mobius.waila"
-    }
-    compile "com.enderio.core:EnderCore:${config.minecraft.version}-${config.endercore.version}:dev"
     compile "thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev"
+    compile "com.mod-buildcraft:buildcraft:7.1.23:dev"
 
     //downloads.gtnewhorizons.com
-    compile ":HardcoreEnderExpansion:MC-1.7.10_v1.8.6"
-    compile ":Railcraft:1.7.10-9.12.2.0:dev"
-    compile ":GT-PlusPlus:1.7.05.53"
-    compile ":twilightforest:1.7.10-2.3.8.5-dev-deobf"
     compile ":WitcheryExtras:1.0.1-dev"
     compile ":witchery:1.7.10-0.24.1:deobf"
     //jitpack
-    compile("com.github.GTNewHorizons:GT5-Unofficial:master-SNAPSHOT:dev") {
-        setChanging(true)
-    }
-    compile "com.github.GTNewHorizons:StructureLib:1.0.6:deobf"
+    compile "com.github.GTNewHorizons:baubles:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:Hardcore-Ender-Expansion:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:AppleCore:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:EnderIO:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:NotEnoughItems:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:Railcraft:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:twilightforest:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:GT5-Unofficial:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:GTplusplus:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:StructureLib:master-SNAPSHOT:dev"
     compile("com.github.GTNewHorizons:TinkersConstruct:master-SNAPSHOT:dev") {
         setChanging(true)
     }
