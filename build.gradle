@@ -66,33 +66,16 @@ repositories {
         name = "UsrvDE"
         url = "http://jenkins.usrv.eu:8081/nexus/content/repositories/releases/"
     }
-    maven { // Baubles
-    	name = "UsrvDE_3rdParty"
-    	url = "http://jenkins.usrv.eu:8081/nexus/content/repositories/thirdparty/"
-    }
-    maven {
-        name = "chickenbones"
-        url = "http://chickenbones.net/maven/"
-    }
     maven {
         name = "gt"
         url = "https://gregtech.overminddl1.com/"
     }
-    maven { // TConstruct
-        name = 'DVS1 Maven FS'
-        url = 'http://dvs1.progwml6.com/files/maven'
-    }
     maven {
-        url = "http://maven.ic2.player.to/"
+        url = "https://maven.ic2.player.to/"
         name = "ic2"
     }
     maven {
-        url = "http://www.ryanliptak.com/maven/"
-        name = "applecore"
-    }
-    maven {
-        url = "http://maven.cil.li/"
-        name = "OpenComputers"
+        url "https://cursemaven.com"
     }
     maven {
         name = "jitpack"
@@ -124,31 +107,36 @@ dependencies {
     //jitpack
     compile "com.github.GTNewHorizons:baubles:master-SNAPSHOT:dev"
     compile "com.github.GTNewHorizons:Hardcore-Ender-Expansion:master-SNAPSHOT:dev"
-    compile "com.github.GTNewHorizons:AppleCore:master-SNAPSHOT:dev"
+    compileOnly "com.github.GTNewHorizons:AppleCore:master-SNAPSHOT:dev"
+    runtime "curse.maven:cofh-lib-220333:2388748"
     compile "com.github.GTNewHorizons:EnderIO:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:EnderCore:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:CodeChickenLib:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:CodeChickenCore:master-SNAPSHOT:dev"
     compile "com.github.GTNewHorizons:NotEnoughItems:master-SNAPSHOT:dev"
     compile "com.github.GTNewHorizons:Railcraft:master-SNAPSHOT:dev"
     compile "com.github.GTNewHorizons:twilightforest:master-SNAPSHOT:dev"
     compile "com.github.GTNewHorizons:GT5-Unofficial:master-SNAPSHOT:dev"
     compile "com.github.GTNewHorizons:GTplusplus:master-SNAPSHOT:dev"
     compile "com.github.GTNewHorizons:StructureLib:master-SNAPSHOT:dev"
+    compile "com.github.GTNewHorizons:Mantle:master-SNAPSHOT:dev"
     compile("com.github.GTNewHorizons:TinkersConstruct:master-SNAPSHOT:dev") {
         setChanging(true)
     }
-    compile("mantle:Mantle:1.7.10-0.3.2.jenkins207:deobf")
-    compile("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-1.7.10-SNAPSHOT:dev") {
+    compile("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:master-SNAPSHOT:dev") {
         setChanging(true)
     }
     compile("com.github.GTNewHorizons:ForestryMC:master-SNAPSHOT:dev") {
         setChanging(true)
     }
+    runtime "com.github.GTNewHorizons:ironchest:master-SNAPSHOT:dev"
+    runtime "com.github.GTNewHorizons:Galacticraft:master-SNAPSHOT:dev"
     compile("com.github.GTNewHorizons:GalacticGregGT5:master-SNAPSHOT") {
         setChanging(true)
     }
     compile("com.github.GTNewHorizons:bartworks:master-SNAPSHOT:dev") {
         setChanging(true)
     }
-    compile fileTree(dir: "libs", include: "*.jar")
 }
 
 processResources
