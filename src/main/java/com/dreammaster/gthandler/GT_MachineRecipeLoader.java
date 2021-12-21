@@ -2671,6 +2671,37 @@ public class GT_MachineRecipeLoader implements Runnable {
         this.run3();
     }
 
+    public int calc_soldering_amount(float needed_tier, float current_tier, float positive, float negative)
+    {
+    	// needed_tier is the circuit tier (in the code, not the actual ingame tier)
+    	// current_tier is the soldering alloy tier
+    	// positive is the adjustment of the curve for when higher tier alloys are used in lower tier circuits
+    	// negative is the adjustment of the curve for when lower tier alloys are used in higher tier circuits
+    	//
+    	// Also:
+    	// I just realized, I HATE java already.
+    	// This sucks.
+    	// A LOT!
+    	// Didn't even take that long for me to hate it lmao
+    	float result = 1;
+    	if (current_tier < needed_tier)
+    	{
+    		float diff = current_tier - needed_tier;
+    		double tmp = Math.pow(2, (-1*diff*negative));
+    		tmp = 100 * Math.exp(tmp) - 144;
+    		result = (float)tmp;
+    	}
+    	else
+    	{
+    		result = 100 / (1 + positive*(current_tier - needed_tier));
+    	}
+    	if (result < 1)
+    	{
+    		result = 1;
+    	}
+    	return (int)Math.ceil(144 * result / 100);
+    }
+	
     public void run3() {
         GT_Values.RA.addAssemblerRecipe(new ItemStack[]{ItemList.Circuit_Parts_Glass_Tube.get(2L), GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Copper, 4), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 4), GT_Utility.getIntegratedCircuit(5)}, Materials.Redstone.getMolten(144L), ItemList.Circuit_Parts_Vacuum_Tube.get(2L), 160, 8);
         GT_Values.RA.addAssemblerRecipe(new ItemStack[]{ItemList.Circuit_Parts_Glass_Tube.get(4L), GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.Copper, 4), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 4), GT_Utility.getIntegratedCircuit(5)}, Materials.RedAlloy.getMolten(72L), ItemList.Circuit_Parts_Vacuum_Tube.get(4L), 160, 8);
@@ -3253,13 +3284,31 @@ public class GT_MachineRecipeLoader implements Runnable {
         ExtraChips[0] = CustomItemList.SchematicsMoonBuggy.get(1L);
         ExtraChips[1] = CustomItemList.SchematicsCargoRocket.get(1L);
         ExtraChips[2] = CustomItemList.SchematicsAstroMiner.get(1L);
-        //put the soldering Materials in this array
-        Materials[] solderingMaterials = new Materials[]{Materials.Lead, Materials.SolderingAlloy, Materials.Tin};
-
-        for (Materials tMat : solderingMaterials) {//TODO dream things using soldering go in here!
-
-            int tMultiplier = tMat.contains(SubTag.SOLDERING_MATERIAL_GOOD) ? 1 : tMat.contains(SubTag.SOLDERING_MATERIAL_BAD) ? 4 : 2;
-
+        
+        Map<Materials, Float> SOLDERING_MAP = Materials.soldering_alloys();
+		for (Map.Entry<Materials, Float> entry : SOLDERING_MAP.entrySet()) {
+			Materials tMat = entry.getKey();
+			float material_soldering_tier = entry.getValue();
+		
+		////put the soldering Materials in this array
+		// No, you don't.
+        //Materials[] solderingMaterials = new Materials[]{Materials.Lead, Materials.SolderingAlloy, Materials.Tin};
+		//}
+        //for (Materials tMat : solderingMaterials) {//TODO dream things using soldering go in here!
+		//	if (tMat.mStandardMoltenFluid != null && tMat.contains(SubTag.SOLDERING_MATERIAL) && !(GregTech_API.mUseOnlyGoodSolderingMaterials && !tMat.contains(SubTag.SOLDERING_MATERIAL_GOOD))) {
+        //
+        //for (Materials tMat : solderingMaterials) {//TODO dream things using soldering go in here!
+        //
+        //    int tMultiplier = tMat.contains(SubTag.SOLDERING_MATERIAL_GOOD) ? 1 : tMat.contains(SubTag.SOLDERING_MATERIAL_BAD) ? 4 : 2;
+			
+// tMultiplier = 
+// tMat SOLDERING_MATERIAL_GOOD = 1
+// tMat SOLDERING_MATERIAL_BAD  = 4
+// tMat SOLDERING_MATERIAL      = 2
+			
+			// Need this to give me some values that resemble what the default is.
+			int tMultiplier = calc_soldering_amount(0f, material_soldering_tier, 0.6f, 0.7f);
+			
             //Rocket Circuits
             GT_Values.RA.addCircuitAssemblerRecipe(new ItemStack[]{ItemList.Circuit_Quantumprocessor.get(1L), RocketMaterial[0], GT_Utility.getIntegratedCircuit(1)}, tMat.getMolten(576L * tMultiplier / 2L), RocketChip[0], 9000, 480, true);
             GT_Values.RA.addCircuitAssemblerRecipe(new ItemStack[]{ItemList.Circuit_Data.get(1L), RocketMaterial[0], GT_Utility.getIntegratedCircuit(1)}, tMat.getMolten(576L * tMultiplier / 2L), RocketChip[0], 9000, 480, true);
