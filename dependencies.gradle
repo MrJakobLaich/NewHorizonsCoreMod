@@ -1,8 +1,7 @@
 // Add your dependencies here
 
 dependencies {
-    //compile("com.github.GTNewHorizons:GT5-Unofficial:master-SNAPSHOT:dev")
-	compile(files("D:/Code/minecraft/GT5-Unofficial/build/libs/gregtech-1.7.10-5.09.40.16-1-g9fb99c2.dirty-dev.jar"))
+    compile("com.github.MrJakobLaich:GT5-Unofficial:master-SNAPSHOT:dev")
     compile("com.github.GTNewHorizons:Yamcl:master-SNAPSHOT:dev")
     compile("com.github.GTNewHorizons:Baubles:master-SNAPSHOT:dev")
 
