@@ -1,4 +1,5 @@
 package com.dreammaster.gthandler;
+import java.util.Map;
 
 import cpw.mods.fml.common.Loader;
 import forestry.api.recipes.IFermenterRecipe;
