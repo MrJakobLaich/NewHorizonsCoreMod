@@ -3308,7 +3308,7 @@ public class GT_MachineRecipeLoader implements Runnable {
 // tMat SOLDERING_MATERIAL      = 2
 			
 			// Need this to give me some values that resemble what the default is.
-			int tMultiplier = calc_soldering_amount(1f, material_soldering_tier, 0.6f, 0.7f);
+			int tMultiplier = calc_soldering_amount(1f, material_soldering_tier, 0.6f, 1.5f);//0.7f);
 			
             //Rocket Circuits
             GT_Values.RA.addCircuitAssemblerRecipe(new ItemStack[]{ItemList.Circuit_Quantumprocessor.get(1L), RocketMaterial[0], GT_Utility.getIntegratedCircuit(1)}, tMat.getMolten(tMultiplier * 2L), RocketChip[0], 9000, 480, true);
